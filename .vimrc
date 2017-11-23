@@ -340,6 +340,7 @@ set pastetoggle=<F2>
 
 " Set mouse mode for vim
 set mouse=a
+set ttymouse=xterm
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
