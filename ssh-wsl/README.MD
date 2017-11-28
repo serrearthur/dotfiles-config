@@ -1,4 +1,4 @@
-##SSH-AGENT FOR WSL
+## SSH-AGENT FOR WSL
 
 ---
 Inspiration taken from [this github repository](https://github.com/bahamas10/windows-bash-ssh-agent).
