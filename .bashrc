@@ -106,9 +106,12 @@ alias l='ls -CF'
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-#vim alias
-alias vi='vim.gtk'
-alias vim='vim.gtk'
+# vim alias
+#alias vi='nvim'
+#alias vim='nvim'
+
+# maven alias
+alias mvn='cmd.exe /C mvn.cmd'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
