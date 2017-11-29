@@ -1,7 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype plugin on          " Enable filetype plugins
 set modeline                " Allow file specific Vim settings
 set hidden                  " Keep changed buffers without requiring saves
 set viewoptions=unix,slash  " Better Unix/Windows compatibility
@@ -23,9 +22,9 @@ call vundle#end()
 " Plugin configuration
 "" NERDTree
 map <F3> :NERDTreeToggle<CR>
-autocmd vimenter * NERDTree " NerdTREE on startup
-autocmd vimenter * wincmd p " We focus the file to edit rather than NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Quit if last tab is a NerdTREE
+" autocmd vimenter * NERDTree " NerdTREE on startup
+" autocmd vimenter * wincmd p " We focus the file to edit rather than NERDTree
 
 "" Airline powerline symbols
 let g:airline_symbols = {}
@@ -37,6 +36,30 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 let g:airline_symbols.maxlinenr = ''
+
+"" Neomake configuration
+nnoremap <C-b> :w<cr>:Neomake<cr>
+let g:neomake_open_list = 2 	" Automatically open the error list
+let g:neomake_list_height = 5	" Error list height
+let g:neomake_bash_enabled_makers = ['shellcheck']		" Configuration for Bash
+let g:neomake_bash_shellcheck_maker = {
+   \ 'args': ['-s bash'],
+   \ }
+let g:neomake_sh_enabled_makers = ['shellcheck']		" Configuration for Shell
+let g:neomake_sh_shellcheck_maker = {
+   \ 'args': ['-s sh'],
+   \ }
+let g:neomake_javascript_enabled_makers = ['eslint'] 	" Configuration for JS
+let g:neomake_python_enabled_makers = ['pylint']		" Configuration for Python
+let g:neomake_c_enabled_makers = ['clang']				" Configuration for C
+let g:neomake_c_clang_maker = {
+   \ 'args': ['-Wall', '-Wextra', '-Weverything', '-pedantic'],
+   \ }
+let g:neomake_cpp_enabled_makers = ['clang']			" Configuration for C++
+let g:neomake_cpp_clang_maker = {
+   \ 'exe': 'clang++',
+   \ 'args': ['-Wall', '-Wextra', '-Weverything', '-pedantic', '-Wno-sign-conversion'],
+   \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General settings
@@ -76,14 +99,12 @@ set pastetoggle=<F2>
 
 " Use system clipboard
 set clipboard+=unnamedplus
+
+" <C-c> is used to copy selection in visual mode
 vnoremap <C-c> "+y
+
+" Corrected behaviour of <Del> key in normal mode
 nnoremap <Del> "_x
-
-" Neomake and other build commands (ctrl-b)
-nnoremap <C-b> :w<cr>:Neomake<cr>
-
-autocmd BufNewFile,BufRead *.tex,*.bib noremap <buffer> <C-b> :w<cr>:new<bar>r !make<cr>:setlocal buftype=nofile<cr>:setlocal bufhidden=hide<cr>:setlocal noswapfile<cr>
-autocmd BufNewFile,BufRead *.tex,*.bib imap <buffer> <C-b> <Esc><C-b>
 
 " :W sudo saves the file (useful for handling the permission-denied error)
 command W w !sudo tee > /dev/null %

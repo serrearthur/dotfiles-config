@@ -31,9 +31,6 @@ shopt -s extglob
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# connect to our VcXsrv instance (WSL only)
-[ "uname -a | grep -q '^Linux.*Microsoft'" ] && export DISPLAY=:0.0
-
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
@@ -106,13 +103,6 @@ alias l='ls -CF'
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# vim alias
-#alias vi='nvim'
-#alias vim='nvim'
-
-# maven alias
-alias mvn='cmd.exe /C mvn.cmd'
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -141,7 +131,12 @@ if command -v tmux>/dev/null; then
     [[ ! $TERM =~ screen ]] && [ -z $TMUX ] &&  exec tmux -2
 fi
 
-# setup ssh-agent configuration (WSL only)
+# WSL-only configuration
 if uname -a | grep -q '^Linux.*Microsoft'; then
+    ## connect to our VcXsrv instance
+    export DISPLAY=:0.0
+    ## source our ssh-agent settings
 	. ~/.ssh/environment
+    ## maven alias
+    alias mvn='cmd.exe /C mvn.cmd'
 fi
