@@ -16,6 +16,7 @@ Plugin 'thirtythreeforty/lessspace.vim' " Remove extraneous whitespace when edit
 Plugin 'bling/vim-airline'              " Status bar plugin
 Plugin 'vim-airline/vim-airline-themes' " Themes for the status bar
 Plugin 'scrooloose/nerdtree'            " Filesystem explorer
+Plugin 'blueyed/vim-qf_resize'          " Automatic resizing of quickfix/location windows
 
 call vundle#end()
 
@@ -38,17 +39,10 @@ let g:airline_symbols.linenr = ''
 let g:airline_symbols.maxlinenr = ''
 
 "" Neomake configuration
-nnoremap <C-b> :w<cr>:Neomake<cr>
+nnoremap <C-b> :w<cr>:Neomake<cr>:QfResizeWindows<cr>
 let g:neomake_open_list = 2 	" Automatically open the error list
-let g:neomake_list_height = 5	" Error list height
 let g:neomake_bash_enabled_makers = ['shellcheck']		" Configuration for Bash
-let g:neomake_bash_shellcheck_maker = {
-   \ 'args': ['-s bash'],
-   \ }
 let g:neomake_sh_enabled_makers = ['shellcheck']		" Configuration for Shell
-let g:neomake_sh_shellcheck_maker = {
-   \ 'args': ['-s sh'],
-   \ }
 let g:neomake_javascript_enabled_makers = ['eslint'] 	" Configuration for JS
 let g:neomake_python_enabled_makers = ['pylint']		" Configuration for Python
 let g:neomake_c_enabled_makers = ['clang']				" Configuration for C
