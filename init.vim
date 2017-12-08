@@ -23,22 +23,14 @@ call vundle#end()
 " Plugin configuration
 "" NERDTree
 map <F3> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Quit if last tab is a NerdTREE
-" autocmd vimenter * NERDTree " NerdTREE on startup
-" autocmd vimenter * wincmd p " We focus the file to edit rather than NERDTree
 
-"" Airline powerline symbols
+"" Airline
+let g:airline_theme='luna'
+let g:airline_powerline_fonts = 1
 let g:airline_symbols = {}
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.linenr = 'Ξ'
 
-"" Neomake configuration
+"" Neomake
 nnoremap <C-b> :w<cr>:Neomake<cr>:QfResizeWindows<cr>
 let g:neomake_open_list = 2 	" Automatically open the error list
 let g:neomake_bash_enabled_makers = ['shellcheck']		" Configuration for Bash
@@ -47,13 +39,13 @@ let g:neomake_javascript_enabled_makers = ['eslint'] 	" Configuration for JS
 let g:neomake_python_enabled_makers = ['pylint']		" Configuration for Python
 let g:neomake_c_enabled_makers = ['clang']				" Configuration for C
 let g:neomake_c_clang_maker = {
-   \ 'args': ['-Wall', '-Wextra', '-Weverything', '-pedantic'],
-   \ }
+            \ 'args': ['-Wall', '-Wextra', '-Weverything', '-pedantic'],
+            \ }
 let g:neomake_cpp_enabled_makers = ['clang']			" Configuration for C++
 let g:neomake_cpp_clang_maker = {
-   \ 'exe': 'clang++',
-   \ 'args': ['-Wall', '-Wextra', '-Weverything', '-pedantic', '-Wno-sign-conversion'],
-   \ }
+            \ 'exe': 'clang++',
+            \ 'args': ['-Wall', '-Wextra', '-Weverything', '-pedantic', '-Wno-sign-conversion'],
+            \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General settings
@@ -106,6 +98,15 @@ command W w !sudo tee > /dev/null %
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
+" Fixes indentation and removes trailing spaces
+fun! CleanFile()
+    let l:save = winsaveview()
+    normal gg=G
+    %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+noremap <Leader>w :call CleanFile()<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -141,8 +142,6 @@ endtry
 set cmdheight=2
 
 " Color theme settings
-" colorscheme pablo
-let g:airline_theme='luna'
 set number
 set cursorline
 set background=dark
