@@ -128,7 +128,7 @@ fi
 
 # run tmux on startup
 if command -v tmux>/dev/null; then
-    [[ ! $TERM =~ screen ]] && [ -z $TMUX ] &&  exec tmux -2
+    [[ ! "$TERM" =~ screen ]] && [ -z "$TMUX" ] &&  exec tmux -2
 fi
 
 # WSL-only configuration

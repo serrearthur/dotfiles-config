@@ -28,7 +28,7 @@ map <F3> :NERDTreeToggle<CR>
 let g:airline_theme='luna'
 let g:airline_powerline_fonts = 1
 let g:airline_symbols = {}
-let g:airline_symbols.linenr = 'Ξ'
+let g:airline_symbols.linenr = '⌑'
 
 "" Neomake
 nnoremap <C-b> :w<cr>:Neomake<cr>:QfResizeWindows<cr>
@@ -112,10 +112,6 @@ noremap <Leader>w :call CleanFile()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
 
 " Useful mappings for managing tabs
 map <leader>c :tabnew<cr>
