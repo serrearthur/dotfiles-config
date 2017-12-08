@@ -11,23 +11,24 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'kien/ctrlp.vim'                 " Fuzzy file search
 Plugin 'benekastah/neomake'             " Build tool (mapped below to <c-b>)
+Plugin 'blueyed/vim-qf_resize'          " Automatic resizing of quickfix/location windows
 Plugin 'Valloric/YouCompleteMe'         " Autocompletion for C/C++, Python, JavaScript
 Plugin 'thirtythreeforty/lessspace.vim' " Remove extraneous whitespace when edit mode is exited
 Plugin 'bling/vim-airline'              " Status bar plugin
 Plugin 'vim-airline/vim-airline-themes' " Themes for the status bar
 Plugin 'scrooloose/nerdtree'            " Filesystem explorer
-Plugin 'blueyed/vim-qf_resize'          " Automatic resizing of quickfix/location windows
+Plugin 'jistr/vim-nerdtree-tabs'        " NERTree extension to group explorer with tabs
 
 call vundle#end()
 
 " Plugin configuration
 "" NERDTree
-map <F3> :NERDTreeToggle<CR>
+map <F3> :NERDTreeFocusToggle<CR>
 
 "" Airline
 let g:airline_theme='luna'
-let g:airline_powerline_fonts = 1
 let g:airline_symbols = {}
+let g:airline_powerline_fonts = 1
 let g:airline_symbols.linenr = '⌑'
 
 "" Neomake
