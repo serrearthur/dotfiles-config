@@ -15,7 +15,10 @@ HIST_STAMPS="dd.mm.yyyy"
 
 # Tmux plugin configuration
 ZSH_TMUX_AUTOSTART="true"
+ZSH_TMUX_AUTOSTART_ONCE="true"
 ZSH_TMUX_AUTOCONNECT="false"
+ZSH_TMUX_AUTOQUIT="true"
+ZSH_TMUX_FIXTERM="false"
 
 # Powerlevel9k configuration
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
@@ -87,10 +90,9 @@ if ! zgen saved; then
     zgen oh-my-zsh
 
     # plugins
+    zgen oh-my-zsh plugins/tmux
     zgen oh-my-zsh plugins/gitfast
     zgen oh-my-zsh plugins/sudo
-    zgen oh-my-zsh plugins/debian
-    zgen oh-my-zsh plugins/autojump
     zgen oh-my-zsh plugins/command-not-found
     zgen oh-my-zsh plugins/extract
     zgen oh-my-zsh plugins/docker
