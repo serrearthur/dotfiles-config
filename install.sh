@@ -3,15 +3,17 @@
 os_version=""
 prerequisite() {
     local os_name_lowercase="$(uname -a | tr '[:upper:]' '[:lower:]')"
-    if grep -q '^linux.*microsoft' <<< $os_name_lowercase
+    if grep -q '^linux.*microsoft' <<< "$os_name_lowercase"
     then
         os_version="windows"
         install wslu
-    elif grep -q 'darwin' <<< $os_name_lowercase
-        os_version="osx"
+    elif grep -q 'darwin' <<< "$os_name_lowercase"
+    then
+    	os_version="osx"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         install coreutils
-    elif grep -q 'linux' <<< $os_name_lowercase
+    elif grep -q 'linux' <<< "$os_name_lowercase"
+    then
         os_version="linux"
     else
         echo "OS not recognized : $(uname -a)"
@@ -53,6 +55,10 @@ else
 fi
 
 chsh -s $(which zsh)
+
+# Neovim Plug setup
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 nvim "+:PlugInstall"
 
 echo Installation done.
